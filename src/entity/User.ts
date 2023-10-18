@@ -9,16 +9,20 @@ export class User {
     @Column()
     firstName: string
 
-    @Column({nullable:true})
-    middleName: string |null
+    @Column()
+    middleName: string 
 
     @Column()
     lastName: string
 
-    @Column()
-    pet: string
+    @Column({unique:true})
+    email: string 
 
     @Column()
-    age: number
+    password: string 
+
+    
+    @Column({nullable:true, select:false})
+    refreshToken: string 
 
 }

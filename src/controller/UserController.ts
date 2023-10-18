@@ -2,6 +2,7 @@ import { AppDataSource } from "../data-source"
 import { NextFunction, Request, Response } from "express"
 import { User } from "../entity/User"
 import { userRepository } from "../repositories"
+import { validationResult } from "express-validator";
 
 export class UserController {
 
@@ -20,7 +21,7 @@ export class UserController {
 
 
     static async create(request:Request, response:Response, next:NextFunction){
-    const data = await userRepository.createUser(request.body);
+        const data = await userRepository.createUser(request.body);
     return response.send(data);
     }
     
@@ -36,6 +37,12 @@ export class UserController {
 
         const id=Number(request.params.id);
         const data = await userRepository.deleteUser(id);
+        return response.send(data);
+    }
+
+    static async findByEmail(request: Request, response: Response, next: NextFunction) {
+        const email=request.body.email;
+        const data = await userRepository.findByEmail(email); 
         return response.send(data);
     }
 

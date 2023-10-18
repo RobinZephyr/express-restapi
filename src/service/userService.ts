@@ -22,6 +22,7 @@ export class UserService{
         return users;
     }
 
+
     async updateUser(id:number, data:Partial<User>){
         const user = await this.userRepository.findOne({where: { id } })
         if (user){
@@ -42,5 +43,12 @@ export class UserService{
         }else{
             return{message:"Not Found"}
         }
+    }
+
+    
+    async findByEmail(email:string){
+        //Select All from User
+        const users = await this.userRepository.findOne({where:{email}})
+        return users;
     }
 }
